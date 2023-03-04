@@ -32,6 +32,7 @@ Debes obtener los siguientes resultados:
 "boolean"
 ```
 
+### Solución
 ```js
 export function solution(valor) {
     return typeof valor;
@@ -40,7 +41,40 @@ export function solution(valor) {
 
 ***
 
+## - [x] Día 2: Calcula la propina
+En este desafío tendrás que calcular la propina que deben dejar los clientes de un restaurante en función de su consumo.
 
+Recibirás 2 parámetros:
+
+billAmount: El costo total de lo que hayan consumido.
+tipPercentage: El porcentaje de propina que deban dejar.
+Ambos valores serán de tipo Number.
+Los valores serán siempre positivos incluyendo el 0.
+deberá devolver el valor de la propina como un número.
+Tendrás inputs y outputs como los siguientes 👇
+
+Ejemplo 1:
+
+```js
+Input: calculateTip(100, 10);
+Output: 10;
+```
+
+Ejemplo 2:
+
+```js	
+Input: calculateTip(1524.33, 25);
+Output: 381.0825;
+```
+
+### Solución
+```js
+export function calculateTip(billAmount, tipPercentage) {
+    return billAmount * (tipPercentage / 100);
+}
+```
+
+***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
 
