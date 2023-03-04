@@ -7,9 +7,15 @@ Este repositorio contiene los ejercicios y retos del curso de 30 días de JavaSc
 
 ## ¿Qué es 30 días de JavaScript?
 El reto consiste en aprender un concepto nuevo cada día y aplicarlo en un ejercicio práctico. El reto es de 6 semanas, pero puedes hacerlo a tu ritmo.
+
 ***
 
+<details>
+<summary>
+
 ## - [x] Día 1: Retorna el tipo
+</summary>
+
 En este desafío encontrarás una función llamada solution que recibe un parámetro llamado valor. Debes encontrar el tipo de dato del parámetro valor y retornarlo desde la función solution.
 
 Recuerda que el parámetro valor será distinto por cada distinta forma en que ejecutemos la función solution.
@@ -38,10 +44,13 @@ export function solution(valor) {
     return typeof valor;
 }
 ```
+</details>
 
-***
+<details>
+<summary>
 
 ## - [x] Día 2: Calcula la propina
+</summary>
 En este desafío tendrás que calcular la propina que deben dejar los clientes de un restaurante en función de su consumo.
 
 Recibirás 2 parámetros:
@@ -73,10 +82,15 @@ export function calculateTip(billAmount, tipPercentage) {
     return billAmount * (tipPercentage / 100);
 }
 ```
+</details>
 
-***
+
+<details>
+<summary>
 
 ## - [x] Día 3: Dibuja un triangulo usando bucles
+</summary>
+
 En este desafío, debes dibujar un triángulo isósceles usando bucles.
 
 Recibirás dos parámetros: size y character, que definen el tamaño y el carácter con el que se debe construir el triángulo, respectivamente. Además, el triángulo debe estar alineado a la derecha, lo que significa que la columna más derecha del triángulo debe estar en el borde derecho de la consola.
@@ -124,9 +138,9 @@ export function printTriangle(size, character) {
   return output;
 }
 ```
+</details>
 
 ***
-
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
 
