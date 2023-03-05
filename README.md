@@ -289,7 +289,6 @@ Output: {
 
 ### Solución
 ```js
-// Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus notas
 // Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus calificaciones
 export function getStudentAverage(students) {
   // Crea un objeto 'topic' que almacenará información sobre la clase
