@@ -291,30 +291,28 @@ Output: {
 ```js
 // Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus notas
 export function getStudentAverage(students) {
-  // Inicializa el promedio de la clase a 0 y un arreglo vacío para guardar la información de los estudiantes
-  let classAverage = 0;
-  let studentsInfo = [];
-  // Itera sobre todos los estudiantes en el arreglo 'students'
-  for (let i = 0; i < students.length; i++) {
-    // Suma todas las notas del estudiante actual
-    let grades = students[i].grades.reduce((a, b) => a + b, 0);
-    // Calcula el promedio del estudiante actual
-    let average = grades / students[i].grades.length;
-    // Actualiza el promedio de la clase
-    classAverage += average;
-    // Agrega la información del estudiante actual al arreglo de estudiantes
-    studentsInfo.push({
-      name: students[i].name,
-      average: Number(average.toFixed(2))
-    });
+  
+  let topic = {
+    classAverage: 0,
+    students: []
   }
-  // Calcula el promedio de la clase
-  classAverage = classAverage / students.length;
-  // Retorna un objeto con el promedio de la clase y la información de los estudiantes
-  return {
-    classAverage: Number(classAverage.toFixed(2)),
-    students: studentsInfo
-  };
+  
+  topic.students = students.map(student => {
+    let averageS = student.grades.reduce((acu, val) => acu + val) / student.grades.length;
+    let studentF = {
+      name: student.name,
+      average: averageS.toFixed(2)*1
+    }
+    return studentF;
+  })
+  
+  topic.classAverage = topic.students.reduce((acu, student) => {
+    return acu + student.average;
+  }, 0)
+  
+  topic.classAverage = (topic.classAverage / topic.students.length).toFixed(2)*1;
+  
+  return topic;
 }
 ```
 
