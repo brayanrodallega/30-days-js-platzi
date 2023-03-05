@@ -290,15 +290,18 @@ Output: {
 ### Solución
 ```js
 // Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus notas
+// Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus calificaciones
 export function getStudentAverage(students) {
-  
+  // Crea un objeto 'topic' que almacenará información sobre la clase
   let topic = {
     classAverage: 0,
     students: []
   }
   
+  // Itera sobre cada objeto en el arreglo 'students' y calcula el promedio de sus calificaciones
   topic.students = students.map(student => {
     let averageS = student.grades.reduce((acu, val) => acu + val) / student.grades.length;
+    // Crea un objeto 'studentF' que contiene el nombre del estudiante y su promedio redondeado a 2 decimales
     let studentF = {
       name: student.name,
       average: averageS.toFixed(2)*1
@@ -306,14 +309,17 @@ export function getStudentAverage(students) {
     return studentF;
   })
   
+  // Calcula el promedio de toda la clase
   topic.classAverage = topic.students.reduce((acu, student) => {
     return acu + student.average;
   }, 0)
   
   topic.classAverage = (topic.classAverage / topic.students.length).toFixed(2)*1;
   
+  // Retorna el objeto 'topic' con la información sobre la clase
   return topic;
 }
+
 ```
 
 </details>
