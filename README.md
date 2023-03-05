@@ -140,6 +140,191 @@ export function printTriangle(size, character) {
 ```
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 4:
+</summary>
+    <details>
+    <summary>
+
+### Encuentra a los gatitos más famosos
+</summary>
+
+En este desafío, debes encontrar al gatito más famoso con base en su número de seguidores.
+
+Recibirás un array de objetos que incluirán las siguientes propiedades:
+
+name: nombre del gatito.
+followers: un array de números, donde cada uno representa los seguidores de cada red social.
+Tu tarea es devolver un array con los nombres de los gatos que tienen solo el mayor número de seguidores. Si hay dos o más gatos con el mismo número máximo de seguidores, deberás incluirlos en el array de resultado, manteniendo el orden en el que aparecen en el array de entrada.
+
+Tendrás inputs y outputs como los siguientes 👇
+
+Ejemplo 1:
+
+```js
+Input: findFamousCats([
+  {
+    name: "Luna",
+    followers: [500, 200, 300]
+  },
+  {
+    name: "Michi",
+    followers: [100, 300]
+  },
+])
+
+Output: ["Luna"]
+```
+
+Ejemplo 2:
+
+```js
+Input: findFamousCats([
+  {
+    name: "Mimi",
+    followers: [320, 120, 70]
+  },
+  {
+    name: "Milo",
+    followers: [400, 300, 100, 200]
+  },
+  {
+    name: "Gizmo",
+    followers: [250, 750]
+  }
+])
+
+Output: ["Milo", "Gizmo"]
+```
+
+### Solución
+```js
+ // Esta función recibe un arreglo de objetos 'cats' que contienen información sobre gatos en una red social
+export function findFamousCats(cats) {
+  // Inicializa el número máximo de seguidores a 0 y un arreglo vacío para guardar los nombres de los gatos famosos
+  let maxFollowers = 0;
+  let famousCats = [];
+  // Itera sobre todos los gatos en el arreglo 'cats'
+  for (let i = 0; i < cats.length; i++) {
+    // Suma todos los seguidores del gato actual
+    let followers = cats[i].followers.reduce((a, b) => a + b, 0);
+    // Si el número de seguidores del gato actual es mayor al número máximo de seguidores, actualiza la información del gato famoso
+    if(followers > maxFollowers) {
+      maxFollowers = followers;
+      famousCats = [cats[i].name];
+    // Si el número de seguidores es igual al número máximo, agrega el nombre del gato actual al arreglo de gatos famosos
+    } else if(followers == maxFollowers) {
+      famousCats.push(cats[i].name);
+    }
+  }
+  // Retorna el arreglo de nombres de gatos famosos
+  return famousCats;
+}
+
+```
+</details>
+<details>
+<summary>
+
+### Obtén el promedio de los estudiantes
+</summary>
+
+En este desafío, deberás calcular el promedio general de una clase, así como el promedio individual de cada estudiante.
+
+Para ello, se te proporcionará un array de objetos, cada uno de los cuales representará a un estudiante y tendrá las siguientes propiedades:
+
+name: El nombre del estudiante
+grades: Las notas de cada materia del estudiante
+A partir de esta información, debes retornar un nuevo objeto que tenga la propiedad classAverage con el promedio de la clase y un array de students con los estudiantes y sus promedios individuales.
+
+Es importante mencionar que los promedios deben ser calculados con precisión y se deben redondear a dos decimales para que los test pasen sin problema alguno. Puedes usar el método toFixed() el cual se usa de la siguiente manera 👇
+
+```js
+const number = 100.32433;
+number.toFixed(2); // "100.32"
+```
+
+👀 Ten en cuenta que este método regresa el número como un string y se espera que sea de tipo numérico.
+
+Ejemplo:
+
+```js
+Input: getStudentAverage([
+  {
+    name: "Pedro",
+    grades: [90, 87, 88, 90],
+  },
+  {
+    name: "Jose",
+    grades: [99, 71, 88, 96],
+  },
+  {
+    name: "Maria",
+    grades: [92, 81, 80, 96],
+  },
+])
+```
+
+```js
+Output: {
+  classAverage: 88.17,
+  students: [
+    {
+      name: "Pedro",
+      average: 88.75
+    },
+    {
+      name: "Jose",
+      average: 88.5
+    },
+    {
+      name: "Maria",
+      average: 87.25
+    }
+  ]
+}
+```
+
+### Solución
+```js
+// Esta función recibe un arreglo de objetos 'students' que contienen información sobre estudiantes y sus notas
+export function getStudentAverage(students) {
+  // Inicializa el promedio de la clase a 0 y un arreglo vacío para guardar la información de los estudiantes
+  let classAverage = 0;
+  let studentsInfo = [];
+  // Itera sobre todos los estudiantes en el arreglo 'students'
+  for (let i = 0; i < students.length; i++) {
+    // Suma todas las notas del estudiante actual
+    let grades = students[i].grades.reduce((a, b) => a + b, 0);
+    // Calcula el promedio del estudiante actual
+    let average = grades / students[i].grades.length;
+    // Actualiza el promedio de la clase
+    classAverage += average;
+    // Agrega la información del estudiante actual al arreglo de estudiantes
+    studentsInfo.push({
+      name: students[i].name,
+      average: Number(average.toFixed(2))
+    });
+  }
+  // Calcula el promedio de la clase
+  classAverage = classAverage / students.length;
+  // Retorna un objeto con el promedio de la clase y la información de los estudiantes
+  return {
+    classAverage: Number(classAverage.toFixed(2)),
+    students: studentsInfo
+  };
+}
+```
+
+</details>
+</details>
+
+</details>
+</summary>
+
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
