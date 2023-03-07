@@ -327,6 +327,74 @@ export function getStudentAverage(students) {
 </details>
 </summary>
 
+<details>
+<summary>
+
+## - [x] Día 5: Encuentra el mayor palíndromo
+</summary>
+En este desafío, debes crear una función que encuentre el palíndromo más largo en una lista de palabras.
+
+Recibirás un único parámetro: un array de palabras. Si no hay ningún palíndromo en la lista, la función debe devolver null. Si hay más de un palíndromo con la misma longitud máxima, debes devolver el primer palíndromo encontrado en la lista.
+
+Un palíndromo es una palabra que se puede leer de la misma manera tanto hacia adelante como hacia atrás.
+
+Ejemplo 1:
+
+```js
+Input: findLargestPalindrome(["racecar", "level", "world", "hello"])
+
+Output: "racecar"
+```
+
+Ejemplo 2:
+
+```js
+Input: findLargestPalindrome(["Platzi", "javascript", "html", "css"])
+
+Output: null
+```
+
+### Solución
+```js
+// Esta función recibe un arreglo de palabras 'words' y retorna el palíndromo más largo
+export function findLargestPalindrome(words) {
+  // Inicializa un arreglo vacío para guardar los palíndromos
+  let palindromes = [];
+  // Itera sobre cada palabra en el arreglo 'words'
+  for (let i = 0; i < words.length; i++) {
+    // Inicializa un arreglo vacío para guardar las letras de la palabra actual
+    let letters = [];
+    // Itera sobre cada letra de la palabra actual
+    for (let j = 0; j < words[i].length; j++) {
+      // Agrega la letra actual al arreglo 'letters'
+      letters.push(words[i][j]);
+    }
+    // Invierte el orden de las letras en el arreglo 'letters'
+    letters = letters.reverse();
+    // Une las letras del arreglo 'letters' en una sola palabra
+    let word = letters.join("");
+    // Si la palabra actual es igual a la palabra invertida, agrega la palabra actual al arreglo de palíndromos
+    if (words[i] == word) {
+      palindromes.push(words[i]);
+    }
+  }
+  // Si no hay palíndromos en el arreglo 'palindromes', retorna null
+  if (palindromes.length == 0) {
+    return null;
+  }
+  // Inicializa el palíndromo más largo con el primer palíndromo en el arreglo 'palindromes'
+  let largestPalindrome = palindromes[0];
+  // Itera sobre cada palabra en el arreglo 'palindromes'
+  for (let i = 0; i < palindromes.length; i++) {
+    // Si la palabra actual es más larga que el palíndromo más largo, actualiza el palíndromo más largo
+    if (palindromes[i].length > largestPalindrome.length) {
+      largestPalindrome = palindromes[i];
+    }
+  }
+  // Retorna el palíndromo más largo
+  return largestPalindrome;
+}
+```
 
 ***
 
