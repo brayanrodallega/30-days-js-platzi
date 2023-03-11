@@ -398,23 +398,85 @@ export function findLargestPalindrome(words) {
 <details>
 <summary>
 
-## - [x] Día 6:
+## - [x] Día 6: Reasignación, redeclaración y modo estricto
 </summary>
+
+### Reasignación
+
+En JavaScript, las variables pueden ser reasignadas. Esto significa que podemos cambiar el valor de una variable después de que se haya creado.
+
+```js
+let name = "Pedro";
+name = "Juan";
+```
+
+### Redefinición
+
+En JavaScript, las variables pueden ser redefinidas. Esto significa que podemos crear una variable con el mismo nombre después de que se haya creado.
+
+```js
+let name = "Pedro";
+let name = "Juan";
+```
+
+### Modo estricto
+
+El modo estricto es una forma de escribir JavaScript que nos ayuda a evitar errores comunes. Para activar el modo estricto, debemos escribir la siguiente línea al inicio de nuestro código:
+
+```js
+"use strict";
+```
 
 </details>
 
 <details>
 <summary>
 
-## - [x] Día 7:
+## - [x] Día 7: Debugging, manejo de errores y programación funcional
 </summary>
+
+### Debugging
+
+El debugging es el proceso de encontrar y solucionar errores en nuestro código. Para hacer debugging, podemos usar la herramienta de debugging de nuestro navegador. En Chrome, podemos abrir la herramienta de debugging presionando F12 o haciendo click en el ícono de debugging en la barra de herramientas.
+
+### Manejo de errores
+
+En JavaScript, podemos manejar errores usando la sentencia try...catch. La sentencia try...catch nos permite ejecutar un bloque de código y atrapar cualquier error que ocurra en ese bloque.
+
+```js
+try {
+  // Código que puede generar un error
+} catch (error) {
+  // Código que se ejecuta si ocurre un error
+}
+```
+
+### Programación funcional
+
+La programación funcional es un paradigma de programación que nos permite escribir código más legible y mantenible. En la programación funcional, las funciones son tratadas como valores. Esto significa que podemos pasar funciones como parámetros y retornar funciones desde otras funciones.
+
+```js
+// Esta función recibe una función 'callback' y un número 'number'
+function doSomething(callback, number) {
+  // Ejecuta la función 'callback' y le pasa el número 'number'
+  callback(number);
+}
+
+// Esta función recibe un número 'number' y lo imprime en la consola
+function printNumber(number) {
+  console.log(number);
+}
+
+// Ejecuta la función 'doSomething' y le pasa la función 'printNumber' y el número 5
+doSomething(printNumber, 5);
+```
 
 </details>
 
 <details>
 <summary>
 
-## - [x] Día 8: 
+## - [x] Día 8: Closure
 </summary>
 
 <details>
