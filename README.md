@@ -143,7 +143,7 @@ export function printTriangle(size, character) {
 <details>
 <summary>
 
-## - [x] Día 4:
+## - [x] Día 4: Array y Objetos 
 </summary>
     <details>
     <summary>
@@ -324,9 +324,6 @@ export function getStudentAverage(students) {
 </details>
 </details>
 
-</details>
-</summary>
-
 <details>
 <summary>
 
@@ -395,6 +392,163 @@ export function findLargestPalindrome(words) {
   return largestPalindrome;
 }
 ```
+
+</details>
+
+<details>
+<summary>
+
+## - [x] Día 6:
+</summary>
+
+</details>
+
+<details>
+<summary>
+
+## - [x] Día 7:
+</summary>
+
+</details>
+
+<details>
+<summary>
+
+## - [x] Día 8: 
+</summary>
+
+<details>
+<summary>
+
+### - [x] Reto 1: Calculadora con closures
+</summary>
+
+En este desafío tendrás que crear una calculadora mediante el uso de closures.
+
+La calculadora debe contar con los siguientes métodos:
+
+add: recibe un número, lo suma al total y devuelve el resultado
+subtract: recibe un número, lo resta al total y devuelve el resultado
+multiply: recibe un número, lo multiplica al total y devuelve el resultado
+divide: recibe un número, lo divide al total y devuelve el resultado
+clear: reinicia el total a 0 y devuelve el resultado
+getTotal: devuelve el total actual.
+
+Ejemplo 1:
+```js
+Input:
+const calculator = createCalculator()
+calculator.add(10)
+
+Output: 10
+```
+
+Ejemplo 2:
+```js
+const calculator = createCalculator()
+calculator.add(10)
+calculator.subtract(-10)
+
+Output: 20
+```
+
+Ejemplo 3:
+```js
+const calculator = createCalculator()
+calculator.add(10)
+calculator.subtract(-10)
+calculator.clear()
+
+Output: 0
+```
+
+### Solución
+```js
+// Esta función crea una calculadora
+export function createCalculator() {
+  // Inicializa el total en 0
+  let total = 0;
+  // Retorna un objeto con los métodos de la calculadora
+  return {
+    // Este método recibe un número 'num' y lo suma al total
+    add(num) {
+      total += num;
+      return total;
+    },
+    // Este método recibe un número 'num' y lo resta al total
+    subtract(num) {
+      total -= num;
+      return total;
+    },
+    // Este método recibe un número 'num' y lo multiplica al total
+    multiply(num) {
+      total *= num;
+      return total;
+    },
+    // Este método recibe un número 'num' y lo divide al total
+    divide(num) {
+      total /= num;
+      return total;
+    },
+    // Este método reinicia el total a 0
+    clear() {
+      total = 0;
+      return total;
+    },
+    // Este método retorna el total actual
+    getTotal() {
+      return total;
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary>
+
+### - [x] Reto 2: Crea tu propio método map
+</summary>
+
+En este desafío debes desarrollar una implementación personalizada del método map utilizando funciones de orden superior.
+
+Recibirás como parámetros un array y una función (func). El array contendrá un conjunto de elementos (números, objetos, strings, etc.) y la función se utilizará para aplicar una acción sobre cada elemento del array. Tu objetivo es devolver un nuevo array con los resultados de la función tal y como lo haría el método map.
+
+Ejemplo 1:
+```js
+Input: myMap([1,2,3,4], (num) => num * 2)
+
+Output: [2,4,6,8]
+```
+
+Ejemplo 2:
+```js
+Input: myMap([
+  {name: "michi", age: 2},
+  {name: "firulais", age: 6}],
+  (pet) => pet.name)
+
+Output: ["michi", "firulais"]
+```
+
+### Solución
+```js
+// Esta función recibe un arreglo 'arr' y una función 'func' y retorna un nuevo arreglo con los resultados de la función 'func'
+export function myMap(arr, func) {
+  // Inicializa un arreglo vacío para guardar los resultados de la función 'func'
+  let results = [];
+  // Itera sobre cada elemento en el arreglo 'arr'
+  for (let i = 0; i < arr.length; i++) {
+    // Aplica la función 'func' al elemento actual y agrega el resultado al arreglo 'results'
+    results.push(func(arr[i]));
+  }
+  // Retorna el arreglo 'results'
+  return results;
+}
+```
+</details>
+
+</details>
 
 ***
 
