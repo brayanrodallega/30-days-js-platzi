@@ -482,7 +482,7 @@ doSomething(printNumber, 5);
 <details>
 <summary>
 
-### - [x] Reto 1: Calculadora con closures
+### Reto 1: Calculadora con closures
 </summary>
 
 En este desafío tendrás que crear una calculadora mediante el uso de closures.
@@ -569,7 +569,7 @@ export function createCalculator() {
 <details>
 <summary>
 
-### - [x] Reto 2: Crea tu propio método map
+### Reto 2: Crea tu propio método map
 </summary>
 
 En este desafío debes desarrollar una implementación personalizada del método map utilizando funciones de orden superior.
@@ -609,6 +609,36 @@ export function myMap(arr, func) {
 }
 ```
 </details>
+
+</details>
+
+<details>
+<summary>
+
+## - [x] Día 9: ECMAScript y TC39
+</summary>
+
+### ECMAScript
+
+Es el estándar subyacente para JavaScript y define las reglas y las características básicas del lenguaje. Cada versión de ECMAScript agrega nuevas características y mejoras al lenguaje, y es ampliamente compatible con los navegadores web y otros entornos de ejecución.
+
+### TC39
+
+es el comité técnico de ECMAScript, el estándar de javascript. Este comité está compuesto por expertos en el lenguaje y es responsable de su evolución y mantenimiento.
+
+La labor de TC39 se divide en varias etapas, las cuales son las siguientes:
+
+Stage 0: Strawman. Esta etapa es la primera en la que se propone una nueva característica. En esta etapa, la idea es muy vaga y no se ha definido aún cómo se implementaría. En esta etapa, la idea se expone en una reunión de TC39 y se discute si es viable o no.
+
+Stage 1: Proposal. En esta etapa, la idea se ha definido y se ha propuesto una solución. En esta etapa, se discute la solución propuesta y se busca mejorarla.
+
+Stage 2: Draft. En esta etapa, la solución propuesta se ha definido y se ha implementado en algún motor de JavaScript. En esta etapa, se busca mejorar la solución propuesta y se busca que sea implementada en otros motores de JavaScript.
+
+Stage 3: Candidate. En esta etapa, la solución propuesta se ha definido y se ha implementado en todos los motores de JavaScript. En esta etapa, se busca mejorar la solución propuesta y se busca que sea implementada en otros motores de JavaScript.
+
+Stage 4: Finished. En esta etapa, la solución propuesta se ha definido y se ha implementado en todos los motores de JavaScript. En esta etapa, se busca mejorar la solución propuesta y se busca que sea implementada en otros motores de JavaScript.
+
+TC39 es el encargado de asegurar que javascript siga siendo un lenguaje de programación moderno y relevante. Los miembros de TC39 son expertos en javascript y sus decisiones afectan directamente a la forma en que se desarrolla el lenguaje y a las características que estarán disponibles en el futuro.
 
 </details>
 
