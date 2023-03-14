@@ -642,6 +642,144 @@ TC39 es el encargado de asegurar que javascript siga siendo un lenguaje de progr
 
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 10: Task Planner
+</summary>
+
+En este desafío, debes implementar la lógica de un planificador de tareas que permita agregar, eliminar y marcar como completadas las tareas, así como también mostrar un registro de las mismas. Para ello, debes construir la lógica de la función closure llamada createTaskPlanner para que devuelva los siguientes métodos:
+
+* **addTask(task):** recibe un objeto que contiene la tarea y la agrega al array de tareas. La tarea debe estar conformada por las siguientes propiedades: id, name, priority, tags y completed, donde el estado completed se agrega automáticamente como falso al momento de agregar una tarea.
+* **removeTask(value):** recibe el id o nombre de la tarea y la elimina del array de tareas.
+* **getTasks():** Devuelve el array de tareas.
+* **getPendingTasks():** Devuelve solo las tareas pendientes.
+* **getCompletedTasks():** Devuelve solo las tareas completadas.
+* **markTaskAsCompleted(value):** Recibe el id o nombre de la tarea y la marca como completada.
+* **getSortedTasksByPriority():** Devuelve una copia de las tareas ordenadas según su prioridad (3: poco urgente, 2: urgente, 1: muy urgente), sin modificar la lista de tareas original.
+* **filterTasksByTag(tag):** Filtra las tareas por una etiqueta específica.
+* **updateTask(taskId, updates):** Buscar la tarea correspondiente con el id especificado y actualizar sus propiedades con las especificadas en el objeto updates.
+Ejemplo 1:
+
+```js
+Input:
+const planner = createTaskPlanner();
+
+planner.addTask({
+    id: 1,
+    name: "Comprar leche",
+    priority: 1,
+    tags: ["shopping", "home"]
+});
+
+
+planner.addTask({
+    id: 2,
+    name: "Llamar a Juan",
+    priority: 3,
+    tags: ["personal"]
+});
+
+planner.markTaskAsCompleted("Llamar a Juan")
+
+Output:
+planner.getCompletedTasks()
+[{
+    id: 2,
+    name: "Llamar a Juan",
+    completed: true,
+    priority: 3,
+    tags: ["personal"]
+}]
+
+Ejemplo 2:
+
+Input:
+const planner = createTaskPlanner();
+
+planner.addTask({
+    id: 1,
+    name: "Comprar leche",
+    priority: 1,
+    tags: ["shopping", "home"]
+});
+
+planner.addTask({
+    id: 2,
+    name: "Llamar a Juan",
+    priority: 3,
+    tags: ["personal"]
+});
+
+Output:
+planner.filterTasksByTag("shopping")
+[{
+    id: 1,
+    name: "Comprar leche",
+    completed: false,
+    priority: 3,
+    tags: ["shopping", "home"]
+}]
+```
+
+### Solución
+```js
+export function createTaskPlanner() {
+  // Inicializa un arreglo vacío para guardar las tareas
+  let tasks = [];
+
+  // Retorna un objeto con los métodos que se describen en el enunciado
+  return {
+    addTask(task) {
+      // Agrega la propiedad 'completed' al objeto 'task' y le asigna el valor 'false'
+      task.completed = false
+      // Agrega la tarea al arreglo 'tasks'
+      tasks.push(task);
+    },
+    removeTask(value) {
+      // Filtra el arreglo 'tasks' para eliminar la tarea que coincida con el id o el nombre recibido como parámetro
+      tasks = tasks.filter((task) => {
+        return ((task.id !== value) && (task.name !== value))
+      });
+    },
+    getTasks() {
+      // Retorna el arreglo 'tasks'
+      return tasks;
+    },
+    getPendingTasks() {
+      // Retorna un arreglo con las tareas que no han sido completadas
+      return tasks.filter((task) => !task.completed);
+    },
+    getCompletedTasks() {
+      // Retorna un arreglo con las tareas que han sido completadas
+      return tasks.filter((task) => task.completed);
+    },
+    markTaskAsCompleted(value) {
+      // Busca la tarea que coincida con el id o el nombre recibido como parámetro
+      let index = tasks.findIndex((task) => {
+        return ((task.name == value) || (task.id == value))
+      })
+      // Marca la tarea como completada
+      tasks[index].completed = true
+    },
+    getSortedTasksByPriority() {
+      // Retorna una copia del arreglo 'tasks' ordenado por prioridad
+      return [...tasks].sort((a, b) => a.priority - b.priority);
+    },
+    filterTasksByTag(tag) {
+      // Retorna un arreglo con las tareas que contienen la etiqueta recibida como parámetro
+      return tasks.filter((task) => task.tags.includes(tag));
+    },
+    updateTask(taskId, updates) {
+      // Busca la tarea que coincida con el id recibido como parámetro
+      let index = tasks.findIndex((task) => task.id == taskId);
+      // Actualiza las propiedades de la tarea con los valores recibidos en el objeto 'updates'
+      tasks[index] = { ...tasks[index], ...updates };
+    }
+  };
+}
+```
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
