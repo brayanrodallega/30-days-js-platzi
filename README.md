@@ -1115,6 +1115,141 @@ export function searchValue(array, value) {
 
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 14: Metodos mutables
+</summary>
+
+<details>
+<summary>
+
+### Playground: Modifica una lista de compras
+</summary>
+
+En este desafío tendrás que procesar una lista de compras.
+
+Deberás implementar la lógica de la función processShoppingList de tal manera que esta módifique el array original de la siguiente manera
+
+Si el nombre del producto incluye la palabra "oferta", se debe aplicar un descuento del 20% al precio del producto.
+Multiplicar el precio del producto por su cantidad
+Eliminar el atributo quantity una vez hecho lo anterior.
+Finalmente, debes retornar el total de la suma de todos los productos de la lista modificada.
+
+Ejemplo 1
+
+```js
+Input:
+const shoppingList = [
+  { name: "pan", price: 20, quantity: 2 },
+  { name: "leche", price: 25, quantity: 1 },
+  { name: "oferta manzanas", price: 10, quantity: 3 },
+]
+
+processShoppingList(shoppingList)
+
+Output: 89
+```
+
+Ejemplo 2
+
+```js
+Input:
+const shoppingList = [
+  { name: "pan", price: 20, quantity: 2 },
+  { name: "leche", price: 25, quantity: 1 },
+  { name: "oferta manzanas", price: 10, quantity: 3 },
+]
+
+processShoppingList(shoppingList)
+
+console.log(shoppingList)
+
+// El array original debe ser modificado
+
+Output:
+[
+  { name: "pan", price: 40 },
+  { name: "leche", price: 25 },
+  { name: "oferta manzanas", price: 24 },
+]
+```
+
+### Solución
+```js
+export function processShoppingList(list) {
+  
+  for (let item of list) {
+    // Si el nombre del producto incluye la palabra "oferta", se debe aplicar un descuento del 20% al precio del producto.
+    if (item.name.includes('oferta')) {
+      const descuento = (item.price/100)*20;
+      item.price -= descuento;
+    }
+    // Multiplicar el precio del producto por su cantidad
+    item.price *= item.quantity;
+    // Eliminar el atributo quantity una vez hecho lo anterior.
+    delete item.quantity;
+  }
+  // Retornar el total de la suma de todos los productos de la lista modificada.
+  return list.reduce((acc, item) => acc + item.price, 0);
+}
+```
+</details>
+
+<details>
+<summary>
+
+### Playground: Ordena los productos por precio y disponibilidad
+</summary>
+
+En este desafío, tendrás que ordenar una lista de productos.
+
+Tu tarea es implementar la lógica de la función sortByAvailabilityAndPrice. Esta función recibirá un array de objetos que representan productos, y devolverá una copia ordenada de dicho array.
+
+El ordenamiento se realizará siguiendo dos criterios:
+
+Primero, los productos disponibles en inventario serán colocados al principio de la lista.
+Luego, los productos serán ordenados por su precio, de manera ascendente.
+Es importante destacar que la lista original no sufrirá ninguna modificación, y que la función devolverá una nueva lista con los cambios mencionados.
+
+Ejemplo
+
+```js	
+Input:
+
+const products = [
+  { name: "product1", price: 10, inStock: true },
+  { name: "product2", price: 20, inStock: false },
+  { name: "product3", price: 15, inStock: true },
+  { name: "product4", price: 5, inStock: false },
+]
+
+sortByAvailabilityAndPrice(products)
+
+Output:
+[
+  { name: "product1", price: 10, inStock: true },
+  { name: "product3", price: 15, inStock: true },
+  { name: "product4", price: 5, inStock: false },
+  { name: "product2", price: 20, inStock: false },
+]
+```
+
+### Solución
+```js
+// Copiamos la lista de productos
+  let list = [...products];
+  // Primero ordenamos por precio los productos
+  list.sort((a, b) => a.price - b.price);
+  // Por último ordenamos por disponibilidad los productos
+  list.sort((a, b) => b.inStock - a.inStock);
+  // Retornamos la lista
+  return list
+```
+</details>
+
+</details>
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
