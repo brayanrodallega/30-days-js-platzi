@@ -1250,6 +1250,230 @@ Output:
 
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 15: Sistema de reservaciones de un hotel
+</summary>
+
+En este desafío deberás crear un sistema de administración para un hotel.
+
+El objetivo de este ejercicio es utilizar closures para implementar la lógica de una función (hotelSystem) que administre un hotel. La función recibirá un parámetro rooms, definirá el número total de habitaciones.
+
+El closure debe retornar las siguientes funciones:
+
+* **searchReservation(id):** esta función permitirá buscar una reservación por su ID. En caso de no encontrarla, se retornará un error con el mensaje "La reservación no fue encontrada".
+
+* **getSortReservations():** esta función nos devolverá una copia de las reservaciones sin modificar el array original ordenando las reservaciones por fecha de check-in de manera ascendente.
+
+* **addReservation(reservation):** esta función se usará para agregar una nueva reservación. Debe asegurarse de que la habitación solicitada esté disponible para las fechas de check-in y check-out. En caso de que esté reservada, se retornará un error con el mensaje "La habitación no está disponible".
+
+* **removeReservation(id):** esta función eliminará la reservación correspondiente al ID recibido y la retornará. En caso de que la reservación no exista, se retornará un error con el mensaje "La reservación que se busca remover no existe".
+
+* **getReservations():** esta función nos devolverá todas las reservaciones.
+
+* **getAvailableRooms(checkIn, checkOut):** esta función recibirá dos parámetros, checkIn y checkOut con formato "dd/mm". La función debe devolver las habitaciones disponibles para las fechas dadas.
+
+El formato que recibirás para las reservaciones será el siguiente:
+
+```js
+id: un identificador único
+name: El nombre de quien agenda
+checkIn: Fecha de llegada
+checkOut: Fecha de salida
+roomNumber: La habitación solicitada
+```
+
+Ejemplo 1:
+
+```js
+Input:
+
+const hotel = hotelSystem(10);
+
+// Agregar una nueva reservación
+hotel.addReservation({
+  id: 1,
+  name: "John Doe",
+  checkIn: "01/01",
+  checkOut: "02/01",
+  roomNumber: 1,
+});
+
+hotel.getReservations();
+
+Output:
+[
+  {
+    id: 1,
+    name: "John Doe",
+    checkIn: "01/01",
+    checkOut: "02/01",
+    roomNumber: 1,
+  }
+]
+```
+
+Ejemplo 2:
+
+```js
+Input:
+
+const hotel = hotelSystem(10);
+
+hotel.addReservation({
+  id: 1,
+  name: "John Doe",
+  checkIn: "01/01",
+  checkOut: "02/01",
+  roomNumber: 1,
+});
+
+hotel.addReservation({
+  id: 2,
+  name: "Pepe Doe",
+  checkIn: "01/01",
+  checkOut: "02/01",
+  roomNumber: 7,
+});
+
+// Buscar una resevación hecha
+hotel.searchReservation(2);
+
+Output:
+{
+  id: 2,
+  name: "Pepe Doe",
+  checkIn: "01/01",
+  checkOut: "02/01",
+  roomNumber: 7,
+}
+```
+
+Ejemplo 3:
+
+```js
+Input:
+
+const hotel = hotelSystem(10);
+
+hotel.addReservation({
+  id: 1,
+  name: "John Doe",
+  checkIn: "01/01",
+  checkOut: "02/01",
+  roomNumber: 1,
+});
+
+hotel.addReservation({
+  id: 2,
+  name: "Pepe Doe",
+  checkIn: "01/01",
+  checkOut: "10/01",
+  roomNumber: 9,
+});
+
+// Buscamos habitaciones disponibles entre el 01 y el 05 del primer mes
+hotel.getAvailableRooms("01/01", "05/01")
+
+Output:
+
+[2, 3, 4, 5, 6, 7, 8, 10]
+```
+
+### Solución
+```js
+function hotelSystem(rooms) {
+  
+  let nRooms = [];
+  
+  for(let i = 1; i <= rooms; i++) {
+    nRooms.push(i);
+  }
+  
+  let reservations = [];
+  
+  // Función de conversión de string a Date
+  function convertirFecha(fechaString) {
+    let partes = fechaString.split('/');
+    let fecha = new Date();
+    fecha.setFullYear(new Date().getFullYear()); // Establecer el año actual
+    fecha.setMonth(parseInt(partes[1]) - 1); // Restar 1 porque los meses comienzan en 0
+    fecha.setDate(parseInt(partes[0])); // Establecer el día
+    return fecha;
+  }
+
+  // Función de comparación para ordenar por fecha
+  function compararFechas(a, b) {
+    return convertirFecha(a.checkIn) - convertirFecha(b.checkIn);
+  }
+  
+  return {
+    searchReservation(id) {
+      // esta función permitirá buscar una reservación por su ID. En caso de no encontrarla, se retornará un error con el mensaje "La reservación no fue encontrada".
+      let findRoom = false;
+      findRoom = reservations.find((room) => {
+        return room.id == id;
+      })
+      
+      if (findRoom) {
+        return findRoom;
+      } else {
+        throw new Error("La reservación no fue encontrada")
+      }
+    },
+    
+    getSortReservations() {
+      // esta función nos devolverá una copia de las reservaciones sin modificar el array original ordenando las reservaciones por fecha de check-in de manera ascendente.
+      return [...reservations].sort(compararFechas)
+    },
+    
+    addReservation(reservation) {
+      // esta función se usará para agregar una nueva reservación. Debe asegurarse de que la habitación solicitada esté disponible para las fechas de check-in y check-out. En caso de que esté reservada, se retornará un error con el mensaje "La habitación no está disponible".
+      if (nRooms.some((room) => room == reservation.roomNumber)) {
+        const index = nRooms.findIndex((item) => {
+          return item === reservation.roomNumber;
+        });
+        nRooms.splice(index, 1);
+        const newReservation = { ...reservation }; // crear una copia del objeto de reservación
+  reservations.push(newReservation);
+        return "Reserva exitosa"
+      } else {
+        throw new Error("La habitación no está disponible");
+      }
+    },
+    
+    removeReservation(id) {
+      // esta función eliminará la reservación correspondiente al ID recibido y la retornará. En caso de que la reservación no exista, se retornará un error con el mensaje "La reservación que se busca remover no existe".
+      if (reservations.some((room) => room.id == id)) {
+        const index = reservations.findIndex((item) => {
+          return item.id === id;
+        });
+        let roomDeleted = reservations.find(item => item.id === id);
+        nRooms.push(roomDeleted.roomNumber)
+        nRooms.sort((a,b) => a - b)
+        reservations.splice(index, 1);
+        return roomDeleted;
+      } else {
+        throw new Error("La habitación no está disponible");
+      }
+    },
+    
+    getReservations() {
+      //  esta función nos devolverá todas las reservaciones.
+      return reservations;
+    },
+    
+    getAvailableRooms(checkIn, checkOut) {
+      // esta función recibirá dos parámetros, checkIn y checkOut con formato "dd/mm". La función debe devolver las habitaciones disponibles para las fechas dadas.
+      return nRooms.filter(item => item);
+    }
+  }
+}
+```
+</details>
+
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
