@@ -1704,6 +1704,273 @@ class Car {
 
 </details>
 
+
+<details>
+<summary>
+
+## - [x] Día 18: Abstracción y Encapsulamiento en JavaScript
+</summary>
+
+<details>
+<summary>
+
+### - [x] ¿Qué es la abstracción?
+</summary>
+
+La abstracción es el proceso de ocultar los detalles de implementación de un objeto y mostrar solo las características esenciales al usuario. La abstracción permite que el usuario se concentre en lo que el objeto hace en lugar de cómo lo hace.
+
+La abstracción es un concepto muy importante en la programación. La abstracción permite que los programadores creen programas complejos a partir de piezas más pequeñas y simples. La abstracción también permite que los programadores reutilicen código y eviten la duplicación de código.
+
+<details>
+<summary>
+
+### - [x] Playground: Crea un sistema de carrito de compras
+</summary>
+
+En este desafío debes crear un sistema de carrito de compras.
+
+Dentro del playground tendrás un archivo product.js que será la clase base y será abstracta. Deberás crear las clases hijas Article y Service que extenderán de Product.
+
+La clase Article deberá implementar el método ``addToCart()`` de manera que retorne el string "Agregando x unidades del artículo x al carrito", donde x es el nombre y la cantidad del producto. Por otro lado, la clase Service deberá implementar el método ``addToCart()`` de manera que retorne el string "Agregando el servicio x al carrito", donde x es el nombre del servicio.
+
+Además, debes crear la clase Cart que será el carrito de compras y tendrá los siguientes métodos:
+
+``addProduct(product)`` este método agregará un producto al final de la lista de compras y deberá llamar al método ``addToCart()`` de cada producto o servicio.
+``deleteProduct(product)`` este método recibirá un producto y lo eliminará de la lista de productos
+``calculateTotal()`` este método calculará el total de los productos agregados y lo devolverá.
+``getProducts()`` este método devolerá el array de los productos que contiene el carrito.
+
+Ejemplo 1
+
+```js
+Input:
+
+const book = new Article("Libro", 100, 2);
+const course = new Service("Curso", 120, 1);
+
+const cart = new Cart();
+cart.addProduct(book);
+cart.addProduct(course);
+cart.calculateTotal();
+
+
+Output:
+
+Agregando 2 unidades del artículo Libro al carrito
+Agregando el servicio Curso al carrito
+320
+```
+
+Ejemplo 2
+
+```js
+Input:
+
+const book = new Article("Libro", 100, 2);
+const course = new Service("Curso", 120, 1);
+
+const cart = new Cart();
+cart.addProduct(book);
+cart.addProduct(course);
+cart.deleteProduct(book);
+cart.calculateTotal();
+
+
+Output:
+
+Agregando 2 unidades del artículo Libro al carrito
+Agregando el servicio Curso al carrito
+120
+```
+
+### Solución
+```js
+// product.js
+export class Product {
+  // No debes editar este archivo ❌
+  constructor(name, price, quantity) {
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+  }
+
+  addToCart() {
+    throw new Error(
+      "La lógica de este método debe ser implementada por las clases hijas"
+    );
+  }
+}
+
+// exercise.js 
+import { Product } from "./product";
+
+export class Article extends Product {
+  constructor(name, price, quantity) {
+    super(name, price, quantity);
+  }
+
+  addToCart() {
+    return `Agregando ${this.quantity} unidades del artículo ${this.name} al carrito`
+  }
+}
+
+export class Service extends Product {
+  constructor(name, price, quantity) {
+    super(name, price, quantity);
+  }
+
+  addToCart() {
+    return `Agregando el servicio ${this.name} al carrito`
+  }
+}
+
+export class Cart {
+
+  constructor() {
+    this.products = [];
+  }
+
+  addProduct(product) {
+    if (product !== null) {
+      this.products.push(product);
+    }
+    product.addToCart();
+  }
+
+  deleteProduct(product) {
+    this.products = this.products.filter(item => item.name !== product.name)
+  }
+
+  calculateTotal() {
+    return this.products.reduce((acc, prod) => acc + (prod.price * prod.quantity), 0)
+  }
+
+  getProducts() {
+    return this.products;
+  }
+}
+```
+</details>
+
+</details>
+
+
+<details>
+<summary>
+
+### - [x] ¿Qué es el encapsulamiento?
+</summary>
+
+El encapsulamiento es el proceso de ocultar los detalles de implementación de un objeto y mostrar solo las características esenciales al usuario. La abstracción permite que el usuario se concentre en lo que el objeto hace en lugar de cómo lo hace.
+
+La abstracción es un concepto muy importante en la programación. La abstracción permite que los programadores creen programas complejos a partir de piezas más pequeñas y simples. La abstracción también permite que los programadores reutilicen código y eviten la duplicación de código.
+
+<details>
+<summary>
+
+### - [x] Playground: Encapsula los datos de los usuarios
+</summary>
+
+En este desafío, debes implementar la lógica de la clase "Usuario" que represente un usuario en una red social y utilizar encapsulamiento para proteger sus datos privados.
+
+La clase debe tener las siguientes variables privadas:
+
+name
+age
+friends (array de objetos Usuario)
+messages (array de strings)
+Además, debes proporcionar los siguientes métodos públicos:
+
+``addFriend(friend)``: agrega un usuario a la lista de amigos del usuario actual.
+``sendMessage(message, friend)``: agrega un mensaje a la lista de mensajes del usuario actual y al amigo especificado.
+``showMessages()``: devuelve la lista de mensajes del usuario actual.
+También debes tener definidos los getters y setters para acceder a los datos privados como el nombre y la edad, los cuales pueden ser modificados mediante su propio setter.
+
+Ejemplo 1:
+
+```js
+Input:
+
+const usuario1 = new Usuario("Juan", 20);
+const usuario2 = new Usuario("Maria", 25);
+usuario1.addFriend(usuario2);
+usuario1.sendMessage("Hola Maria!", usuario2);
+
+usuario1.showMessages()
+
+Output:
+
+["Hola Maria!"]
+```
+
+Ejemplo 2:
+
+```js
+Input:
+
+const usuario1 = new Usuario("Juan", 20);
+usuario1.name = "Pepito"
+console.log(usuario1.name)
+
+Output:
+
+"Pepito"
+```
+
+### Solución
+```js
+// exercise.js
+export class User {
+
+  constructor(name, age) {
+    this._name = name;
+    this._age = age;
+    this._friends = [];
+    this._messages = [];
+  }
+
+  addFriend(friend) {
+    if (friend) {
+      this._friends.push(friend);
+    }
+    return friend;
+  }
+
+  sendMessage(message, friend) {
+    if (message && friend) {
+      this._messages.push(message);
+      friend._messages.push(message);
+    }
+  }
+
+  showMessages() {
+    return this._messages;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(name) {
+    this._name = name;
+  }
+
+  get age() {
+    return this._age;
+  }
+
+  set age(age) {
+    this._age = age;
+  }
+}
+```
+</details>
+
+</details>
+
+</details>
+
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
