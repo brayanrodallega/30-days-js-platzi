@@ -1536,6 +1536,174 @@ export function protectDog(dog) {
 ```
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 17: Prototipos en JavaScript
+</summary>
+
+<details>
+<summary>
+
+### - [x] ¿Qué es un prototipo?
+</summary>
+
+Un prototipo es un objeto que sirve como plantilla para crear otros objetos. Los prototipos son la base de la herencia en JavaScript.
+
+Los prototipos son objetos que tienen propiedades y métodos. Cuando se crea un objeto, se puede especificar un prototipo para ese objeto. Todos los objetos creados a partir de ese prototipo heredarán las propiedades y métodos del prototipo.
+
+Los prototipos son muy útiles para crear objetos que comparten las mismas propiedades y métodos. Por ejemplo, si tienes un objeto que representa un perro, puedes crear un prototipo de perro que contenga las propiedades y métodos comunes a todos los perros. Luego, puedes crear nuevos objetos de perro a partir del prototipo de perro.
+
+Los prototipos también son útiles para crear objetos que comparten propiedades y métodos con otros objetos. Por ejemplo, si tienes un objeto que representa un perro y otro objeto que representa un gato, puedes crear un prototipo de animal que contenga las propiedades y métodos comunes a todos los animales. Luego, puedes crear nuevos objetos de perro y gato a partir del prototipo de animal.
+
+</details>
+
+<details>
+<summary>
+
+### - [x] Playground: Modifica el prototype de los arrays
+</summary>
+
+En este desafío, deberás crear tu propia implementación de filter para el prototype de los arrays.
+
+Esto implica agregar un nuevo método llamado myFilter al prototype de los arrays, el cual permitirá filtrar elementos de manera similar al método filter nativo del lenguaje. El objetivo es poder usar el método myFilter de la siguiente manera:
+
+Ejemplo 1:
+
+```js
+Input:
+
+const array = [1,2,3,4,5,6]
+
+array.myFilter(num => num % 2 === 0)
+
+Output: [2,4,6]
+```
+
+Ejemplo 2:
+
+```js
+Input:
+
+const arr = [
+  {
+    name: "Juan",
+    age: 10,
+  },
+  {
+    name: "Pedro",
+    age: 20,
+  },
+  {
+    name: "Maria",
+    age: 30,
+  },
+];
+
+array.myFilter((person) => person.age > 18)
+
+Output: [
+  {
+    name: "Pedro",
+    age: 20,
+  },
+  {
+    name: "Maria",
+    age: 30,
+  },
+]
+```
+
+### Solución
+```js
+Array.prototype.myFilter = function (callback) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    const element = this[i];
+    if (callback(element)) {
+      result.push(element);
+    }
+  }
+  return result;
+};
+```
+</details>
+
+<details>
+<summary>
+
+### - [x] Playground: Crea un auto usando clases
+</summary>
+
+En este desafío, deberás crear la lógica para un automóvil mediante el uso de clases.
+
+Deberás implementar la lógica necesaria en la clase Car de tal manera que nos pueda servir de base para crear nuevos autos que reciba los siguientes parametros:
+
+* brand: Marca del auto
+* model: Modelo del auto
+* year: Año del auto
+* mileage: kilometraje del auto
+* state: El estado por defecto del auto será false, indicando que el auto se encuentra apagado.
+
+Además, deberás implementar los siguientes métodos para hacer funcional los vehículos creados con la clase **Car**
+
+* turnOn(): Método que encenderá el auto.
+* turnOff(): Método que apagará el auto.
+* drive(kilometers): Con este método podremos aumentar el kilometraje según los kilómetros dados pero solo si el auto está encendido. En caso contrario, deberá mostrar el siguiente mensaje de error: "El auto está apagado".
+
+Ejemplo 1:
+```js
+Input:
+const toyota = new Auto("Toyota", "Corolla", 2020, 0);
+toyota.turnOn();
+toyota.drive(100);
+toyota.mileage
+
+Output: 100
+```
+
+Ejemplo 2
+
+```js
+const toyota = new Auto("Toyota", "Corolla", 2020, 0);
+toyota.turnOff()
+toyota.drive(100)
+
+Output: Error("El auto está apagado")
+```
+
+### Solución
+```js
+class Car {
+  constructor(brand, model, year, mileage) {
+    this.brand = brand;
+    this.model = model;
+    this.year = year;
+    this.mileage = mileage;
+    this.state = false;
+  }
+
+  turnOn() {
+    this.state = true;
+  }
+
+  turnOff() {
+    this.state = false;
+  }
+
+  drive(kilometers) {
+    if (this.state) {
+      this.mileage += kilometers;
+    } else {
+      throw new Error("El auto está apagado");
+    }
+  }
+}
+```
+</details>
+
+</details>
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
