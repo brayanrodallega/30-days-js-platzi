@@ -2536,6 +2536,118 @@ export class User {
 </details>
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 22: Patrones de diseño Adapter y Decorator
+</summary>
+
+### Adapter
+
+El patrón de diseño Adapter nos permite adaptar una interfaz a otra. Esto nos permite utilizar una clase que no es compatible con otra clase.
+
+### Decorator
+
+El patrón de diseño Decorator nos permite agregar funcionalidades a una clase sin modificar su código.
+
+<details>
+<summary>
+
+### Playground: Mejora el código usando builder pattern
+</summary>
+
+En este desafío, te proponemos utilizar el patrón builder para construir un objeto "auto".
+
+Actualmente, la construcción de un auto en el código es confusa y difícil de leer.
+
+```js
+const car = new CarBuilder(2021, "Model X", "Tesla", "Red", 5000, false);
+```
+
+Tu tarea será implementar el patrón builder para lograr una construcción más clara y legible.
+
+Ejemplo:
+
+```js
+Input:
+
+const car = new CarBuilder()
+  .setYear(2021)
+  .setModel("Model X")
+  .setBrand("Tesla")
+  .setColor("Red")
+  .setPrice(50000)
+  .setIsAvailable(false)
+  .build()
+
+Output: {
+  year: 2021,
+  model: "Model x",
+  brand: "Tesla",
+  color: "Red",
+  price: 50000,
+  isAvailable": false
+}
+```
+
+### Solución
+```js
+// CarBuilder.class.js
+export class CarBuilder {
+   constructor() {
+    this.year = 0;
+    this.model = '';
+    this.brand = '';
+    this.color = '';
+    this.price = 0;
+    this.isAvailable = null;
+   }
+
+    setYear(year) {
+      this.year = year;
+      return this;
+    }
+
+    setModel(model) {
+      this.model = model;
+      return this;
+    }
+
+    setBrand(brand) {
+      this.brand = brand;
+      return this;
+    }
+
+    setColor(color) {
+      this.color = color;
+      return this;
+    }
+
+    setPrice(price) {
+      this.price = price;
+      return this;
+    }
+
+    setIsAvailable(isAvailable) {
+      this.isAvailable = isAvailable;
+      return this;
+    }
+
+    build() {
+      return {
+        year: this.year,
+        model: this.model,
+        brand: this.brand,
+        color: this.color,
+        price: this.price,
+        isAvailable: this.isAvailable
+      }
+    }
+}
+```
+</details>
+</details>
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
