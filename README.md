@@ -2648,6 +2648,221 @@ export class CarBuilder {
 </details>
 </details>
 
+<details>
+<summary>
+
+## - [x] Día 23: Patrones de diseño Proxy y Observer
+</summary>
+
+### Proxy
+
+El patrón de diseño Proxy nos permite crear un intermediario entre dos objetos. Este intermediario puede ser utilizado para agregar funcionalidades a un objeto sin modificar su código.
+
+<details>
+<summary>
+
+### Playground: Implementa el patrón proxy en un servicio de mensajería
+</summary>
+
+El objetivo de este ejercicio es crear un proxy que controle el acceso a un servicio de mensajería.
+
+En el sistema de archivos encontrarás un archivo llamado ``messages.js`` que representa al servicio de mensajería y cuenta con dos métodos: ``sendMessage(text)`` y ``getHistory()``. Sin embargo, actualmente, no se verifica si el usuario que hace uso de la clase está logeado, por lo que es necesario implementar un proxy.
+
+Tu tarea es agregar la lógica necesaria de la clase ``MessagesProxy`` que actuará como intermediario entre los clientes y el servicio de mensajería, manteniendo los métodos de ``Messages.js``, pero agregando una verificación de si el usuario está logeado antes de permitir el acceso al historial de mensajes o el envío de un mensaje. Si el usuario no está registrado, se deberá lanzar un error con el mensaje "Usuario no registrado".
+
+Recuerda hacer uso de ``throw new Error("")``
+
+Además, deberás implementar la logica de la clase ``User`` con los métodos ``login()``, ``logout()`` y ``isLoggedIn()``, que permitirá determinar si el usuario está logeado o no.
+
+Ejemplo 1:
+
+```js
+Input:
+const user = new User("John")
+
+user.login()
+user.isLoggedIn()
+
+Output: true
+```
+
+Ejemplo 2:
+
+```js
+Input:
+const user = new User("John")
+const messages = new Messages()
+const messagesProxy = new MessagesProxy(messages, user)
+
+user.login()
+messagesProxy.sendMessage("Hola")
+messagesProxy.getHistory()
+
+Output: ["Hola"]
+```
+
+Ejemplo 3:
+
+```js
+Input:
+const user = new User("John")
+const messages = new Messages()
+const messagesProxy = new MessagesProxy(messages, user)
+
+messagesProxy.sendMessage("Hola")
+
+Output: Error("Usuario no registrado")
+```
+
+### Solución
+```js
+// User.class.js
+export class User {
+  constructor(name) {
+    this.name = name;
+    this.log = false;
+  }
+
+  login() {
+    this.log = true;
+  }
+
+  logout() {
+    this.log = false;
+  }
+
+  isLoggedIn() {
+    return this.log;
+  }
+}
+
+// Messages.class.js
+export class Messages {
+  // No debes editar este código ❌
+  constructor() {
+    this.history = [];
+  }
+
+  sendMessage(text) {
+    this.history.push(text);
+  }
+
+  getHistory() {
+    return this.history;
+  }
+}
+
+// MessagesProxy.class.js
+export class MessagesProxy {
+  constructor(messages, user) {
+    this.messages = messages;
+    this.user = user;
+  }
+
+  sendMessage(text) {
+    if (this.user.isLoggedIn()) {
+      this.messages.sendMessage(text);
+    } else {
+      throw new Error("Usuario no registrado")
+    }
+  }
+
+  getHistory() { 
+    if (this.user.isLoggedIn()) {
+      return this.messages.getHistory();
+    } else {
+      throw new Error("Usuario no registrado")
+    }
+  }
+}
+```
+</details>
+
+### Observer
+
+El patrón de diseño Observer nos permite crear un sistema de suscripción a eventos. Este patrón es muy utilizado en el desarrollo de aplicaciones web, ya que nos permite crear un sistema de suscripción a eventos que se ejecutan cuando ocurren ciertas acciones.
+
+<details>
+<summary>
+
+### Playground: Implementa el patrón observer en un sistema de suscripción a eventos
+</summary>
+
+En este desafío, debes implementar un patrón observer en un sistema de newsletter.
+
+Tendrás que crear una clase ``Newsletter`` que gestione la suscripción de los usuarios a un newsletter y envíe actualizaciones cuando se publique un nuevo artículo. La clase tendrá una lista de suscriptores (``subscribers``)inicializada, y los siguientes métodos: ``subscribe(subscriber)`` para agregar nuevos suscriptores, ``unsubscribe(email)`` para eliminar a un suscriptor de la lista mediante su correo electrónico, y ``post(article)`` que recibirá un objeto con dos propiedades: ``title`` y ``content``.
+
+Además, necesitarás crear la clase ``Subscriber``, la cual se inicializará con un correo electrónico y un método ``receive(article)`` que imprimirá en consola un mensaje que indica que el suscriptor ha recibido un artículo específico.
+
+Ejemplo
+
+```js
+Input:
+
+const newsletter = new Newsletter();
+const subscriber1 = new Subscriber("pepe@mail.com");
+const subscriber2 = new Subscriber("juanito@mail.com");
+const subscriber3 = new Subscriber("pedro@mail.com");
+
+const article = {
+  title: "30 días de js",
+  content: "Aprende js en 30 días"
+}
+
+newsletter.subscribe(subscriber1);
+newsletter.subscribe(subscriber2);
+newsletter.subscribe(subscriber3);
+
+newsletter.post(article);
+
+Output:
+"El suscriptor pepe@mail.com ha recibido el artículo: 30 días de js"
+"El suscriptor juanito@mail.com ha recibido el artículo: 30 días de js"
+"El suscriptor pedro@mail.com ha recibido el artículo: 30 días de js"
+```
+
+### Solución
+```js
+// Newsletter.class.js
+export class Newsletter {
+  constructor() {
+    this.subscribers = [];
+  }
+
+  subscribe(subscriber) {
+    this.subscribers.push(subscriber);
+  }
+
+  unsubscribe(email) {
+    this.subscribers = this.subscribers.filter(subscriber => {
+      return subscriber.email !== email;
+    });
+  }
+
+  post(article) {
+    if (this.subscribers.length >= 1) {
+      this.subscribers.forEach(subscriber => {
+        subscriber.receive(article);
+      });
+    }
+  }
+
+}
+
+// Subscriber.class.js
+export class Subscriber {
+  constructor(email) {
+    this.email = email;
+  }
+
+  receive(article) {
+    console.log(`El suscriptor ${this.email} ha recibido el artículo: ${article.title}`)
+  }
+}
+```
+</details>
+</details>
+
 ***
 
 ¡Mantendré esta lista actualizada a medida que avance en mi ruta de aprendizaje!
